@@ -9,6 +9,13 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
         {/* Heading */}
+        <div className="flex justify-center mb-6">
+          <img
+            src="/Print.svg" // adjust path if needed
+            alt="Platform Logo"
+            className="h-[125px] w-auto" // big size
+          />
+        </div>        
         <h2 className="text-2xl font-semibold text-gray-800 mb-2">Sign in</h2>
         <p className="text-sm text-gray-500 mb-6">
           Don’t have account?{" "}
