@@ -1,51 +1,116 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { HiEye, HiEyeOff } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
-const Register = () => {
+export default function Register() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [accountType, setAccountType] = useState("recruiter"); // Default tab
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="bg-white p-10 rounded-xl shadow-md w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center mb-8">Create Your Account</h2>
-        <form className="space-y-5">
-          <input
-            type="text"
-            placeholder="Full Name"
-            className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <button className="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 transition">
-            Register
-          </button>
-        </form>
-        <p className="text-center text-md mt-6">
-          Already have an account?{' '}
-          <Link to="/signin" className="text-blue-600 hover:underline">
-            Sign In
+      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+        {/* Heading */}
+        <h2 className="text-2xl font-semibold text-gray-800 mb-2">Create account.</h2>
+        <p className="text-sm text-gray-500 mb-6">
+          Already have account?{" "}
+          <Link to="/signin" className="text-blue-600 font-medium hover:underline">
+            Log In
           </Link>
         </p>
+
+        {/* Toggle Tabs */}
+        <div className="flex bg-gray-100 rounded-md overflow-hidden mb-6">
+          <button
+            onClick={() => setAccountType("user")}
+            className={`w-1/2 px-4 py-2 text-sm font-medium transition ${
+              accountType === "user"
+                ? "bg-blue-900 text-white"
+                : "text-gray-700 hover:bg-gray-200"
+            }`}
+          >
+            User
+          </button>
+          <button
+            onClick={() => setAccountType("recruiter")}
+            className={`w-1/2 px-4 py-2 text-sm font-medium transition ${
+              accountType === "recruiter"
+                ? "bg-blue-900 text-white"
+                : "text-gray-700 hover:bg-gray-200"
+            }`}
+          >
+            Recruiter
+          </button>
+        </div>
+
+        {/* Form */}
+        <form className="space-y-4">
+          <div className="flex gap-4">
+            <input
+              type="text"
+              placeholder="Full Name"
+              className="w-1/2 border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              type="text"
+              placeholder="Username"
+              className="w-1/2 border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <input
+            type="email"
+            placeholder="Email address"
+            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+
+          {/* Password */}
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="button"
+              className="absolute right-3 top-2.5 text-gray-500"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <HiEyeOff /> : <HiEye />}
+            </button>
+          </div>
+
+          {/* Confirm Password */}
+          <div className="relative">
+            <input
+              type={showConfirm ? "text" : "password"}
+              placeholder="Confirm Password"
+              className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="button"
+              className="absolute right-3 top-2.5 text-gray-500"
+              onClick={() => setShowConfirm(!showConfirm)}
+            >
+              {showConfirm ? <HiEyeOff /> : <HiEye />}
+            </button>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition"
+          >
+            Create Account →
+          </button>
+        </form>
         <Link
-            to="/"
-            className="block text-center mt-4 text-blue-600 hover:underline hover:text-blue-700 transition"
+          to="/"
+          className="block mt-6 text-center text-blue-600 font-medium hover:underline"
         >
-            Back to Home
-        </Link>
+          ← Go to Home
+        </Link>        
       </div>
     </div>
   );
-};
-
-export default Register;
+}

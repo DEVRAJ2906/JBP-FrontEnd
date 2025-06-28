@@ -10,6 +10,7 @@ import {
   FaLinkedinIn,
   FaXTwitter,
 } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 export default function LandingPage() {
   return (
@@ -43,7 +44,7 @@ export default function LandingPage() {
 
         {/* Sign In Button */}
         <button className="text-blue-600 border border-blue-600 px-4 py-2 rounded-md hover:bg-blue-50 transition">
-          Sign In
+          <Link to="/signin">Sign In</Link>
         </button>
       </div>
     </nav>

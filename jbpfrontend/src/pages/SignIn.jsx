@@ -1,41 +1,61 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { HiEye, HiEyeOff } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
-const SignIn = () => {
+export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="bg-white p-10 rounded-xl shadow-md w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center mb-8">Sign In to Your Account</h2>
-        <form className="space-y-5">
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <button className="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 transition">
-            Sign In
-          </button>
-        </form>
-        <p className="text-center text-md mt-6">
-          Don’t have an account?{' '}
-          <Link to="/register" className="text-blue-600 hover:underline">
-            Register
+      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+        {/* Heading */}
+        <h2 className="text-2xl font-semibold text-gray-800 mb-2">Sign in</h2>
+        <p className="text-sm text-gray-500 mb-6">
+          Don’t have account?{" "}
+          <Link to="/register" className="text-blue-600 font-medium hover:underline">
+            Create Account
           </Link>
         </p>
+
+        {/* Form */}
+        <form className="space-y-4">
+          <input
+            type="email"
+            placeholder="Email address"
+            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+
+          {/* Password Field with Toggle */}
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-2.5 text-gray-500"
+            >
+              {showPassword ? <HiEyeOff /> : <HiEye />}
+            </button>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition"
+          >
+            Sign In →
+          </button>
+        </form>
         <Link
-            to="/"
-            className="block text-center mt-4 text-blue-600 hover:underline hover:text-blue-700 transition"
+          to="/"
+          className="block mt-6 text-center text-blue-600 font-medium hover:underline"
         >
-            Back to Home
+          ← Go to Home
         </Link>
       </div>
     </div>
   );
-};
-
-export default SignIn;
+}
