@@ -5,28 +5,58 @@ import { Link } from "react-router-dom";
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [accountType, setAccountType] = useState("recruiter"); // Default tab
+  const [accountType, setAccountType] = useState("recruiter");
+
+  // ✅ Add form fields state
+  const [formData, setFormData] = useState({
+    fullName: "",
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  // ✅ Input change handler
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // ✅ Form submit handler
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent page reload
+
+    const { fullName, username, email, password, confirmPassword } = formData;
+
+    if (!fullName || !username || !email || !password || !confirmPassword) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    // ✅ Do your register logic here (API call etc.)
+    console.log("Form submitted:", { accountType, ...formData });
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        {/* Heading */}
-        <div className="flex justify-center mb-6">
-          <img
-            src="/Print.svg" // adjust path if needed
-            alt="Platform Logo"
-            className="h-[125px] w-auto" // big size
-          />
-        </div>
-        <h2 className="text-2xl font-semibold text-gray-800 mb-2">Create account.</h2>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+          Create account.
+        </h2>
         <p className="text-sm text-gray-500 mb-6">
           Already have account?{" "}
-          <Link to="/signin" className="text-blue-600 font-medium hover:underline">
+          <Link
+            to="/signin"
+            className="text-blue-600 font-medium hover:underline"
+          >
             Log In
           </Link>
         </p>
 
-        {/* Toggle Tabs */}
         <div className="flex bg-gray-100 rounded-md overflow-hidden mb-6">
           <button
             onClick={() => setAccountType("user")}
@@ -50,32 +80,43 @@ export default function Register() {
           </button>
         </div>
 
-        {/* Form */}
-        <form className="space-y-4">
+        {/* ✅ Add onSubmit */}
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="flex gap-4">
             <input
               type="text"
+              name="fullName"
               placeholder="Full Name"
+              value={formData.fullName}
+              onChange={handleChange}
               className="w-1/2 border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="text"
+              name="username"
               placeholder="Username"
+              value={formData.username}
+              onChange={handleChange}
               className="w-1/2 border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           <input
             type="email"
+            name="email"
             placeholder="Email address"
+            value={formData.email}
+            onChange={handleChange}
             className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
-          {/* Password */}
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
+              name="password"
               placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
@@ -87,11 +128,13 @@ export default function Register() {
             </button>
           </div>
 
-          {/* Confirm Password */}
           <div className="relative">
             <input
               type={showConfirm ? "text" : "password"}
+              name="confirmPassword"
               placeholder="Confirm Password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
@@ -103,7 +146,6 @@ export default function Register() {
             </button>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition"
@@ -116,7 +158,7 @@ export default function Register() {
           className="block mt-6 text-center text-blue-600 font-medium hover:underline"
         >
           ← Go to Home
-        </Link>        
+        </Link>
       </div>
     </div>
   );

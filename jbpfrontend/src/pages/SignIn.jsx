@@ -5,17 +5,36 @@ import { Link } from "react-router-dom";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
+  // ✅ Add state for form inputs
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  // ✅ Handle input changes
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // ✅ Handle form submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { email, password } = formData;
+
+    if (!email || !password) {
+      alert("Please fill in both fields.");
+      return;
+    }
+
+    // ✅ Do your login logic here (API call etc.)
+    console.log("Login submitted:", formData);
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
         {/* Heading */}
-        <div className="flex justify-center mb-6">
-          <img
-            src="/Print.svg" // adjust path if needed
-            alt="Platform Logo"
-            className="h-[125px] w-auto" // big size
-          />
-        </div>        
         <h2 className="text-2xl font-semibold text-gray-800 mb-2">Sign in</h2>
         <p className="text-sm text-gray-500 mb-6">
           Don’t have account?{" "}
@@ -24,11 +43,14 @@ export default function Login() {
           </Link>
         </p>
 
-        {/* Form */}
-        <form className="space-y-4">
+        {/* ✅ Add onSubmit handler */}
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <input
             type="email"
+            name="email"
             placeholder="Email address"
+            value={formData.email}
+            onChange={handleChange}
             className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
@@ -36,7 +58,10 @@ export default function Login() {
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
+              name="password"
               placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
