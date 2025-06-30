@@ -7,6 +7,8 @@ import {
   FaUser,
 } from "react-icons/fa";
 
+import { NavLink } from "react-router-dom";
+
 export default function UserDashboard() {
   return (
     <div className="min-h-screen flex bg-gray-100">
@@ -18,14 +20,28 @@ export default function UserDashboard() {
             Candidate Dashboard
           </h2>
           <nav className="space-y-4">
-            <button className="flex items-center gap-2 text-blue-600 font-medium">
-              <FaBriefcase className="text-lg" />
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                `flex items-center gap-2 ${
+                  isActive ? "text-blue-600 font-medium" : "text-gray-600 hover:text-blue-600"
+                }`
+              }
+            >
+              <FaBriefcase />
               Overview
-            </button>
-            <button className="flex items-center gap-2 text-gray-600 hover:text-blue-600">
-              <FaBriefcase className="text-lg" />
+            </NavLink>
+            <NavLink
+              to="/dashboard/applied"
+              className={({ isActive }) =>
+                `flex items-center gap-2 ${
+                  isActive ? "text-blue-600 font-medium" : "text-gray-600 hover:text-blue-600"
+                }`
+              }
+            >
+              <FaBriefcase />
               Applied Jobs
-            </button>
+            </NavLink>
             <button className="flex items-center gap-2 text-gray-600 hover:text-blue-600">
               <FaBookmark className="text-lg" />
               Favorite Jobs
