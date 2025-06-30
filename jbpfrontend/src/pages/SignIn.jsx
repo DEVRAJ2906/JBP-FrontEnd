@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    identifier: "", // Can be email OR username
+    identifier: "", // email OR username
     password: "",
   });
 
@@ -25,14 +25,20 @@ export default function Login() {
       return;
     }
 
-    // Fake login logic
-    if (
-      (identifier === "admin@example.com" || identifier === "admin") &&
-      password !== "123456"
-    ) {
-      alert("Incorrect password for this account.");
+    // Get users from localStorage
+    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+    const matchedUser = existingUsers.find(
+      (user) =>
+        (user.email === identifier || user.userName === identifier) &&
+        user.password === password
+    );
+
+    if (!matchedUser) {
+      alert("Invalid credentials. Please try again.");
       return;
     }
+
     navigate("/dashboard");
   };
 
@@ -52,7 +58,6 @@ export default function Login() {
           </Link>
         </p>
 
-        {/* ✅ Login Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
