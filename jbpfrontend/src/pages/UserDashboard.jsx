@@ -7,9 +7,14 @@ import {
   FaUser,
 } from "react-icons/fa";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function UserDashboard() {
+  const navigate = useNavigate();
+
+  const logoutClick = () => {
+    navigate("/")
+  }
   return (
     <div className="min-h-screen flex bg-gray-100">
       {/* Sidebar */}
@@ -24,7 +29,9 @@ export default function UserDashboard() {
               to="/dashboard"
               className={({ isActive }) =>
                 `flex items-center gap-2 ${
-                  isActive ? "text-blue-600 font-medium" : "text-gray-600 hover:text-blue-600"
+                  isActive
+                    ? "text-blue-600 font-medium"
+                    : "text-gray-600 hover:text-blue-600"
                 }`
               }
             >
@@ -35,7 +42,9 @@ export default function UserDashboard() {
               to="/dashboard/applied"
               className={({ isActive }) =>
                 `flex items-center gap-2 ${
-                  isActive ? "text-blue-600 font-medium" : "text-gray-600 hover:text-blue-600"
+                  isActive
+                    ? "text-blue-600 font-medium"
+                    : "text-gray-600 hover:text-blue-600"
                 }`
               }
             >
@@ -62,7 +71,10 @@ export default function UserDashboard() {
           </nav>
         </div>
 
-        <button className="flex items-center gap-2 text-red-500 font-medium">
+        <button
+          className="flex items-center gap-2 text-red-500 font-medium"
+          onClick={logoutClick}
+        >
           <FaSignOutAlt className="text-lg" />
           Log-out
         </button>
