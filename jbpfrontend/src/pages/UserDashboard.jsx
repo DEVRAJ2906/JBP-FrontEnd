@@ -1,4 +1,11 @@
-import { FaBell, FaBriefcase, FaBookmark, FaCog, FaSignOutAlt, FaUser } from "react-icons/fa";
+import {
+  FaBell,
+  FaBriefcase,
+  FaBookmark,
+  FaCog,
+  FaSignOutAlt,
+  FaUser,
+} from "react-icons/fa";
 
 export default function UserDashboard() {
   return (
@@ -7,7 +14,9 @@ export default function UserDashboard() {
       <aside className="w-64 bg-white shadow-sm p-6 space-y-8">
         {/* Logo + Label */}
         <div>
-          <h2 className="text-sm text-gray-400 uppercase mb-4">Candidate Dashboard</h2>
+          <h2 className="text-sm text-gray-400 uppercase mb-4">
+            Candidate Dashboard
+          </h2>
           <nav className="space-y-4">
             <button className="flex items-center gap-2 text-blue-600 font-medium">
               <FaBriefcase className="text-lg" />
@@ -26,7 +35,9 @@ export default function UserDashboard() {
                 <FaBell className="text-lg" />
                 Job Alert
               </button>
-              <span className="text-sm bg-blue-600 text-white px-2 py-0.5 rounded-full text-xs">09</span>
+              <span className="text-sm bg-blue-600 text-white px-2 py-0.5 rounded-full">
+                09
+              </span>
             </div>
             <button className="flex items-center gap-2 text-gray-600 hover:text-blue-600">
               <FaCog className="text-lg" />
@@ -46,8 +57,12 @@ export default function UserDashboard() {
         {/* Greeting */}
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-semibold text-gray-800">Hello, Esther Howard</h2>
-            <p className="text-sm text-gray-500">Here is your daily activities and job alerts</p>
+            <h2 className="text-xl font-semibold text-gray-800">
+              Hello, Esther Howard
+            </h2>
+            <p className="text-sm text-gray-500">
+              Here is your daily activities and job alerts
+            </p>
           </div>
           <img
             src="/profile.jpg"
@@ -81,8 +96,12 @@ export default function UserDashboard() {
               className="w-10 h-10 rounded-full border-2 border-white"
             />
             <div>
-              <p className="font-medium">Your profile editing is not completed.</p>
-              <p className="text-sm">Complete your profile editing & build your custom Resume</p>
+              <p className="font-medium">
+                Your profile editing is not completed.
+              </p>
+              <p className="text-sm">
+                Complete your profile editing & build your custom Resume
+              </p>
             </div>
           </div>
           <button className="bg-white text-red-600 px-4 py-2 rounded-md font-medium hover:bg-red-100">
@@ -93,8 +112,12 @@ export default function UserDashboard() {
         {/* Recently Applied */}
         <div className="mt-10">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold text-gray-800">Recently Applied</h3>
-            <button className="text-blue-600 text-sm hover:underline">View all →</button>
+            <h3 className="text-lg font-semibold text-gray-800">
+              Recently Applied
+            </h3>
+            <button className="text-blue-600 text-sm hover:underline">
+              View all →
+            </button>
           </div>
 
           <div className="bg-white shadow-sm rounded-md divide-y">

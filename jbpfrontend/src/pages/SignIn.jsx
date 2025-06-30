@@ -1,26 +1,15 @@
 import { useState } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-
-<<<<<<< HEAD
-  const navigate = useNavigate();
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-
-    // 👇 Add real authentication here if needed
-
-    // Simulate login success and redirect
-    navigate("/dashboard");
-=======
   const [formData, setFormData] = useState({
     identifier: "", // Can be email OR username
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,8 +25,7 @@ export default function Login() {
       return;
     }
 
-    // ✅ Fake login logic for demo
-    // Replace this with your real API call
+    // Fake login logic
     if (
       (identifier === "admin@example.com" || identifier === "admin") &&
       password !== "123456"
@@ -45,10 +33,7 @@ export default function Login() {
       alert("Incorrect password for this account.");
       return;
     }
-
-    // ✅ Success
-    alert(`Welcome, ${identifier}! You are now logged in.`);
->>>>>>> origin/main
+    navigate("/dashboard");
   };
 
   return (
@@ -59,17 +44,16 @@ export default function Login() {
         </h2>
         <p className="text-sm text-gray-500 mb-6 text-center">
           Don’t have an account?{" "}
-          <Link to="/register" className="text-blue-600 font-medium hover:underline">
+          <Link
+            to="/register"
+            className="text-blue-600 font-medium hover:underline"
+          >
             Create Account
           </Link>
         </p>
 
-<<<<<<< HEAD
-        {/* Form */}
-        <form onSubmit={handleLogin} className="space-y-4">
-=======
-        <form className="space-y-4" onSubmit={handleSubmit}>
->>>>>>> origin/main
+        {/* ✅ Login Form */}
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
             name="identifier"
