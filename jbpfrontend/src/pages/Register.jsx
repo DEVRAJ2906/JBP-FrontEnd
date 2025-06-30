@@ -35,12 +35,25 @@ export default function Register() {
       return;
     }
 
-    console.log("Form Data:", {
-      ...formData,
-      role: accountType,
-    });
+    // Get existing users
+    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-    navigate("/dashboard");
+    // Check if email or username already exists
+    const userExists = existingUsers.some(
+      (user) => user.email === email || user.userName === userName
+    );
+
+    if (userExists) {
+      alert("User with this email or username already exists.");
+      return;
+    }
+
+    // Save new user
+    const newUser = { fullName, userName, email, password, role: accountType };
+    localStorage.setItem("users", JSON.stringify([...existingUsers, newUser]));
+
+    alert("Registration successful! Please log in.");
+    navigate("/signin");
   };
 
   return (
