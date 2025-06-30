@@ -5,56 +5,62 @@ import { Link } from "react-router-dom";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
-  // ✅ Add state for form inputs
   const [formData, setFormData] = useState({
-    email: "",
+    identifier: "", // Can be email OR username
     password: "",
   });
 
-  // ✅ Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // ✅ Handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { email, password } = formData;
+    const { identifier, password } = formData;
 
-    if (!email || !password) {
-      alert("Please fill in both fields.");
+    if (!identifier || !password) {
+      alert("Please fill in all fields.");
       return;
     }
 
-    // ✅ Do your login logic here (API call etc.)
-    console.log("Login submitted:", formData);
+    // ✅ Fake login logic for demo
+    // Replace this with your real API call
+    if (
+      (identifier === "admin@example.com" || identifier === "admin") &&
+      password !== "123456"
+    ) {
+      alert("Incorrect password for this account.");
+      return;
+    }
+
+    // ✅ Success
+    alert(`Welcome, ${identifier}! You are now logged in.`);
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        {/* Heading */}
-        <h2 className="text-2xl font-semibold text-gray-800 mb-2">Sign in</h2>
-        <p className="text-sm text-gray-500 mb-6">
-          Don’t have account?{" "}
+        <h2 className="text-2xl font-semibold text-gray-800 mb-2 text-center">
+          Welcome back!
+        </h2>
+        <p className="text-sm text-gray-500 mb-6 text-center">
+          Don’t have an account?{" "}
           <Link to="/register" className="text-blue-600 font-medium hover:underline">
             Create Account
           </Link>
         </p>
 
-        {/* ✅ Add onSubmit handler */}
         <form className="space-y-4" onSubmit={handleSubmit}>
           <input
-            type="email"
-            name="email"
-            placeholder="Email address"
-            value={formData.email}
+            type="text"
+            name="identifier"
+            placeholder="Email address or Username"
+            value={formData.identifier}
             onChange={handleChange}
             className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
-          {/* Password Field with Toggle */}
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
@@ -73,7 +79,6 @@ export default function Login() {
             </button>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition"
@@ -81,6 +86,7 @@ export default function Login() {
             Sign In →
           </button>
         </form>
+
         <Link
           to="/"
           className="block mt-6 text-center text-blue-600 font-medium hover:underline"
