@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
+<<<<<<< HEAD
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -15,40 +16,76 @@ export default function Login() {
 
     // Simulate login success and redirect
     navigate("/dashboard");
+=======
+  const [formData, setFormData] = useState({
+    identifier: "", // Can be email OR username
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { identifier, password } = formData;
+
+    if (!identifier || !password) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    // ✅ Fake login logic for demo
+    // Replace this with your real API call
+    if (
+      (identifier === "admin@example.com" || identifier === "admin") &&
+      password !== "123456"
+    ) {
+      alert("Incorrect password for this account.");
+      return;
+    }
+
+    // ✅ Success
+    alert(`Welcome, ${identifier}! You are now logged in.`);
+>>>>>>> origin/main
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        {/* Heading */}
-        <div className="flex justify-center mb-6">
-          <img
-            src="/Print.svg" // adjust path if needed
-            alt="Platform Logo"
-            className="h-[125px] w-auto" // big size
-          />
-        </div>        
-        <h2 className="text-2xl font-semibold text-gray-800 mb-2">Sign in</h2>
-        <p className="text-sm text-gray-500 mb-6">
-          Don’t have account?{" "}
+        <h2 className="text-2xl font-semibold text-gray-800 mb-2 text-center">
+          Welcome back!
+        </h2>
+        <p className="text-sm text-gray-500 mb-6 text-center">
+          Don’t have an account?{" "}
           <Link to="/register" className="text-blue-600 font-medium hover:underline">
             Create Account
           </Link>
         </p>
 
+<<<<<<< HEAD
         {/* Form */}
         <form onSubmit={handleLogin} className="space-y-4">
+=======
+        <form className="space-y-4" onSubmit={handleSubmit}>
+>>>>>>> origin/main
           <input
-            type="email"
-            placeholder="Email address"
+            type="text"
+            name="identifier"
+            placeholder="Email address or Username"
+            value={formData.identifier}
+            onChange={handleChange}
             className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
-          {/* Password Field with Toggle */}
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
+              name="password"
               placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
@@ -60,7 +97,6 @@ export default function Login() {
             </button>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition"
@@ -68,6 +104,7 @@ export default function Login() {
             Sign In →
           </button>
         </form>
+
         <Link
           to="/"
           className="block mt-6 text-center text-blue-600 font-medium hover:underline"
