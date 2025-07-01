@@ -7,7 +7,7 @@ import {
   FaUser,
 } from "react-icons/fa";
 
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Outlet, useLocation } from "react-router-dom";
 
 export default function UserDashboard() {
   const navigate = useNavigate();
@@ -27,6 +27,7 @@ export default function UserDashboard() {
           <nav className="space-y-4">
             <NavLink
               to="/dashboard"
+              end
               className={({ isActive }) =>
                 `flex items-center gap-2 ${
                   isActive
@@ -51,23 +52,50 @@ export default function UserDashboard() {
               <FaBriefcase />
               Applied Jobs
             </NavLink>
-            <button className="flex items-center gap-2 text-gray-600 hover:text-blue-600">
-              <FaBookmark className="text-lg" />
-              Favorite Jobs
-            </button>
+            <NavLink
+              to="/dashboard/favourite"
+              className={({ isActive }) =>
+                `flex items-center gap-2 ${
+                  isActive
+                    ? "text-blue-600 font-medium"
+                    : "text-gray-600 hover:text-blue-600"
+                }`
+              }
+            >
+              <FaBookmark />
+              Favourite Jobs
+            </NavLink>
             <div className="flex items-center justify-between">
-              <button className="flex items-center gap-2 text-gray-600 hover:text-blue-600">
-                <FaBell className="text-lg" />
-                Job Alert
-              </button>
+            <NavLink
+              to="/dashboard/alerts"
+              className={({ isActive }) =>
+                `flex items-center gap-2 ${
+                  isActive
+                    ? "text-blue-600 font-medium"
+                    : "text-gray-600 hover:text-blue-600"
+                }`
+              }
+            >
+                <FaBell />
+                Job Alerts
+            </NavLink>
               <span className="text-sm bg-blue-600 text-white px-2 py-0.5 rounded-full">
                 09
               </span>
             </div>
-            <button className="flex items-center gap-2 text-gray-600 hover:text-blue-600">
-              <FaCog className="text-lg" />
+            <NavLink
+              to="/dashboard/settings"
+              className={({ isActive }) =>
+                `flex items-center gap-2 ${
+                  isActive
+                    ? "text-blue-600 font-medium"
+                    : "text-gray-600 hover:text-blue-600"
+                }`
+              }
+            >
+              <FaCog />
               Settings
-            </button>
+            </NavLink>
           </nav>
         </div>
 
@@ -82,6 +110,8 @@ export default function UserDashboard() {
 
       {/* Main Content */}
       <main className="flex-1 p-8">
+        {location.pathname === "/dashboard" ? (
+          <>
         {/* Greeting */}
         <div className="flex items-center justify-between">
           <div>
@@ -132,7 +162,7 @@ export default function UserDashboard() {
               </p>
             </div>
           </div>
-          <button className="bg-white text-red-600 px-4 py-2 rounded-md font-medium hover:bg-red-100">
+          <button onClick={() => navigate("/dashboard/settings")} className="bg-white text-red-600 px-4 py-2 rounded-md font-medium hover:bg-red-100">
             Edit Profile →
           </button>
         </div>
@@ -212,6 +242,10 @@ export default function UserDashboard() {
             ))}
           </div>
         </div>
+          </>
+        ) : (
+          <Outlet />
+        )}
       </main>
     </div>
   );
